@@ -30,3 +30,20 @@ class Solution(object):
         :rtype: bool
         """
         
+# 15
+# iteration (ineffecient approach)
+
+class Solution(object):
+    def threeSum(self, nums):
+        result = []
+
+        for i in range(len(nums)-2):
+            for j in range(i+1,len(nums) - 1):
+                for k in range(j+1,len(nums)):
+                    if (nums[i] + nums[j] + nums[k] == 0):
+                        arr = sorted([nums[i], nums[j], nums[k]])
+                        if arr not in result:
+                            result.append(arr)
+
+
+        return result
