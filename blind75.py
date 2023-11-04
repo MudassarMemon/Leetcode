@@ -95,3 +95,21 @@ class Solution(object):
                 r -= 1
 
         return res
+
+# 121
+
+class Solution(object):
+    def maxProfit(self, prices):
+        max, l, r = 0, 0 , 1
+
+        while r < len(prices):
+            profit = prices[r] - prices[l]
+            if profit > 0:
+                if max < profit:
+                    max = profit
+            else:
+                l = r
+                
+            r += 1
+            
+        return max
