@@ -113,3 +113,25 @@ class Solution(object):
             r += 1
             
         return max
+
+
+# 3. ineffecient solution 
+
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        cur = []
+        res = []
+
+        for i in range(len(s)):
+            j = i
+            while (j < len(s) and s[j] not in cur):
+                cur.append(s[j])
+                j += 1
+            
+            if len(cur) > len(res):
+                res = cur
+            
+            cur = []
+
+        return len(res)
+
