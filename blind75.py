@@ -135,3 +135,47 @@ class Solution(object):
 
         return len(res)
 
+# effecient solution
+
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        charSet = set()
+        l = 0
+        res = 0
+
+        for r in range(len(s)):
+            while s[r] in charSet:
+                charSet.remove(s[l])
+                l += 1
+
+            charSet.add(s[r])
+            res = max(res, r - l + 1)
+
+        return res
+
+# 424. ineffecient
+
+class Solution(object):
+    def characterReplacement(self, s, k):
+        counter = 0
+        res = 0
+        arr = []
+        l,r = 0, 0
+
+        while r < len(s):
+            if len(arr) == 0 or s[r] in arr:
+                arr.append(s[r])
+                r += 1
+            elif counter < k:
+                arr.append(True)
+                counter += 1
+                r += 1
+            else:
+                counter = 0
+                arr = []
+                l += 1
+                r = l
+
+            res = min(max(res, len(arr)+(k-counter)), len(s))
+
+        return res
