@@ -180,7 +180,7 @@ class Solution(object):
 
         return res
 
-# effecient solution
+# 424. effecient solution
 
 class Solution(object):
     def characterReplacement(self, s, k):
@@ -201,7 +201,7 @@ class Solution(object):
 
 
 
-# optimal solution
+# 424. optimal solution
 
 class Solution(object):
     def characterReplacement(self, s, k):
@@ -221,3 +221,45 @@ class Solution(object):
             res = max(res, r - l + 1)
 
         return res
+
+# 76. optimal
+
+class Solution(object):
+    def minWindow(self, s, t):
+        if t == "": return ""
+
+        window, hashT = {}, {}
+
+        for i in t:
+            hashT[i] = 1 + hashT.get(i, 0)
+
+        res, resLen = [-1, -1], float("infinity")
+        l = 0
+        have, need = 0, len(hashT)
+
+        for r in range(len(s)):
+            c = s[r]
+            window[c] = 1 + window.get(c, 0)
+
+            if c in hashT and window[c] == hashT[c]:
+                have += 1
+
+            while have == need:
+                if (r - l + 1 < resLen):
+                    resLen = r - l + 1
+                    res = [l, r]
+                    
+                window[s[l]] -= 1
+
+                if s[l] in hashT and window[s[l]] < hashT[s[l]]:
+                    have -= 1
+                    
+                l += 1
+
+        
+        l, r = res
+
+        return s[l:r+1] if resLen != float("infinity") else  ""
+        
+
+
