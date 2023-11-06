@@ -179,3 +179,45 @@ class Solution(object):
             res = min(max(res, len(arr)+(k-counter)), len(s))
 
         return res
+
+# effecient solution
+
+class Solution(object):
+    def characterReplacement(self, s, k):
+        count = {}
+        res = 0
+        l = 0
+
+        for r in range(len(s)):
+            count[s[r]] = 1 + count.get(s[r], 0)
+
+            while (r - l + 1) - max(count.values()) > k:
+                count[s[l]] -= 1
+                l += 1
+            
+            res = max(res, r - l + 1)
+
+        return res
+
+
+
+# optimal solution
+
+class Solution(object):
+    def characterReplacement(self, s, k):
+        count = {}
+        maxF = 0
+        res = 0
+        l = 0
+
+        for r in range(len(s)):
+            count[s[r]] = 1 + count.get(s[r], 0)
+            maxF = max(maxF, count[s[r]])
+
+            while (r - l + 1) - maxF > k:
+                count[s[l]] -= 1
+                l += 1
+            
+            res = max(res, r - l + 1)
+
+        return res
