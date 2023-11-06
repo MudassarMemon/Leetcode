@@ -262,4 +262,19 @@ class Solution(object):
         return s[l:r+1] if resLen != float("infinity") else  ""
         
 
+# 20. need to verify
 
+class Solution(object):
+    def isValid(self, s):
+        hash = {"(": ")", "{": "}", "[": "]"}
+        temp = []
+
+        for i in s:
+            if i in hash.keys():
+                temp.append(hash[i])
+            elif temp[0] == i:
+                temp.remove(i)
+            else:
+                return False
+
+        return True
