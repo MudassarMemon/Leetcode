@@ -1,3 +1,55 @@
+#217
+
+class Solution(object):
+    def containsDuplicate(self, nums):
+        dict = {}
+
+        for num in nums:
+            if num in dict:
+                return True
+            dict[num] = True
+        
+        return False
+
+
+#242:
+class Solution(object):
+    def isAnagram(self, s, t):
+        counter = {}
+
+        for i in s: 
+            if i in counter:
+                counter[i] += 1
+            else:
+                counter[i] = 1
+
+        for j in t:
+            if j not in counter:
+                return False
+            else:
+                counter[j] -= 1
+            
+        for count in counter.values():
+            if count != 0:
+                return False
+        
+        return True
+
+#1
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        dict = {}
+
+        for i in range(len(nums)):
+            if (target - nums[i]) in dict:
+                return [dict[target-nums[i]], i]
+            else:
+                dict[nums[i]] = i
+
+     
+
+
 # 125
 
 class Solution(object):
@@ -262,7 +314,7 @@ class Solution(object):
         return s[l:r+1] if resLen != float("infinity") else  ""
         
 
-# 20. need to verify
+# 20. suboptimal
 
 class Solution(object):
     def isValid(self, s):
@@ -272,9 +324,12 @@ class Solution(object):
         for i in s:
             if i in hash.keys():
                 temp.append(hash[i])
-            elif temp[0] == i:
-                temp.remove(i)
+            elif temp and temp[-1] == i:
+                temp.pop()
             else:
                 return False
 
-        return True
+        if len(temp) == 0: 
+            return True
+        else:
+            return False
