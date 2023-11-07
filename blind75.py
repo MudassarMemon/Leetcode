@@ -130,7 +130,27 @@ class Solution(object):
 
         return result
 
+#retried myself:
+
+class Solution(object):
+    def productExceptSelf(self, nums):
+        res =  [1] * len(nums)
+        prefix = 1
+        postfix = 1
+
+        for i in range(len(nums)-1):
+            prefix *= nums[i]
+            res[i+1] *= prefix
+
+        for j in range(len(nums)-1, 0, -1):
+            postfix *= nums[j]
+            res[j-1] *= postfix
+
+        return res
+
+
 #347 
+
 
 class Solution(object):
     def topKFrequent(self, nums, k):
