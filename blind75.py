@@ -101,6 +101,60 @@ class Solution(object):
         
         return res.values()
 
+# 49 Optimal solution:
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        res = defaultdict(list)
+
+        for str in strs:
+            str_sorted = "".join(sorted(str))
+            res[str_sorted].append(str)
+        
+        return res.values()
+#238
+
+class Solution(object):
+    def productExceptSelf(self, nums):
+        result = [1] * len(nums)
+        prefix = 1
+        postfix = 1
+
+        for i in range(len(nums)):
+            result[i] = prefix
+            prefix *= nums[i]
+
+        for j in range(len(nums)-1, -1, -1):
+            result[j] *= postfix 
+            postfix *= nums[j]
+
+        return result
+
+#347 
+
+class Solution(object):
+    def topKFrequent(self, nums, k):
+        result = {}
+
+        for num in nums:
+            if num in result:
+                result[num] += 1
+            else:
+                result[num] = 1
+
+        sorted_result = sorted(result, key=result.get, reverse=True)
+
+        return sorted_result[0:k]
+
+class Solution(object):
+    def topKFrequent(self, nums, k):
+        res = {}
+
+        for num in nums:
+            res[num] = 1 + res.get(num, 0)
+        
+        return sorted(res, key=res.get, reverse=True)[0:k]
+
 # 125
 
 class Solution(object):
