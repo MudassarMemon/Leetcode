@@ -35,7 +35,18 @@ class Solution(object):
         
         return True
 
-#1
+#1 suboptimal
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        for i in range(len(nums)):
+            for j in range(len(nums)):
+                if i == j:
+                    continue
+                elif nums[i] + nums[j] == target:
+                    return [i, j]
+
+#1 optimal
 
 class Solution(object):
     def twoSum(self, nums, target):
@@ -47,8 +58,48 @@ class Solution(object):
             else:
                 dict[nums[i]] = i
 
-     
+or
+class Solution(object):
+    def twoSum(self, nums, target):
+        res = {}
 
+        for i, n in enumerate(nums):
+            if (target-n) in res:
+                return [i, res[target-n]]
+            else:
+                res[n] = i
+
+     
+# 49
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        result = {}
+
+        for str in strs:
+            str_sort = "".join(sorted(str))
+            if str_sort in result:
+                result[str_sort].append(str)
+            else:
+                result[str_sort] = [str]
+
+        return result.values()
+
+#49 neetcode solution:
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        res = defaultdict(list)
+
+        for str in strs:
+            count = [0] * 26
+
+            for char in str:
+                count[ord(char) - ord("a")] += 1
+            
+            res[tuple(count)].append(str)
+        
+        return res.values()
 
 # 125
 
