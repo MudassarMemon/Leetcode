@@ -458,3 +458,33 @@ class Solution(object):
             return True
         else:
             return False
+
+
+# 153 suboptimal:
+
+class Solution(object):
+    def findMin(self, nums):
+        res = float("infinity")
+
+        for n in nums:
+            if n < res:
+                res = n
+        
+        return res
+
+# 12 (my solution)
+
+class Solution(object):
+    def intToRoman(self, num):
+        convert = {1: "I", 5: "V", 10: "X", 50: "L", 100: "C", 500: "D", 1000: "M", 4: "IV", 9: "IX", 40: "XL", 90: "XC", 400: "CD", 900: "CM"}
+        keys = sorted(convert, reverse=True)
+        res = ""
+
+        for key in keys:
+            while(num >= key):
+                res += convert[key]
+                num -= key
+                if num == 0:
+                    return res
+
+
