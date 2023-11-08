@@ -1,3 +1,8 @@
+# The start of my leetcode journey. This script/repo is meant to log my DSA progress. It will likely be unorganized at times and may contain multiple tried solutions for the same problems.
+# I will revisit and organize as this file grows.
+# -- Mudassar Memon
+
+
 #217
 
 class Solution(object):
@@ -12,7 +17,8 @@ class Solution(object):
         return False
 
 
-#242:
+#242
+
 class Solution(object):
     def isAnagram(self, s, t):
         counter = {}
@@ -35,7 +41,7 @@ class Solution(object):
         
         return True
 
-#1 suboptimal
+#1 (suboptimal)
 
 class Solution(object):
     def twoSum(self, nums, target):
@@ -46,7 +52,7 @@ class Solution(object):
                 elif nums[i] + nums[j] == target:
                     return [i, j]
 
-#1 optimal
+#1 (optimal)
 
 class Solution(object):
     def twoSum(self, nums, target):
@@ -58,7 +64,8 @@ class Solution(object):
             else:
                 dict[nums[i]] = i
 
-or
+# or
+
 class Solution(object):
     def twoSum(self, nums, target):
         res = {}
@@ -85,7 +92,7 @@ class Solution(object):
 
         return result.values()
 
-#49 neetcode solution:
+#49 (neetcode)
 
 class Solution(object):
     def groupAnagrams(self, strs):
@@ -101,7 +108,7 @@ class Solution(object):
         
         return res.values()
 
-# 49 Optimal solution:
+# 49 (optimal)
 
 class Solution(object):
     def groupAnagrams(self, strs):
@@ -112,6 +119,7 @@ class Solution(object):
             res[str_sorted].append(str)
         
         return res.values()
+
 #238
 
 class Solution(object):
@@ -130,7 +138,7 @@ class Solution(object):
 
         return result
 
-#retried myself:
+#238 (my solution)
 
 class Solution(object):
     def productExceptSelf(self, nums):
@@ -165,6 +173,8 @@ class Solution(object):
         sorted_result = sorted(result, key=result.get, reverse=True)
 
         return sorted_result[0:k]
+
+# or
 
 class Solution(object):
     def topKFrequent(self, nums, k):
@@ -207,8 +217,7 @@ class Solution(object):
         :rtype: bool
         """
         
-# 15
-# iteration (ineffecient approach)
+# 15 (iteration suboptimal)
 
 class Solution(object):
     def threeSum(self, nums):
@@ -226,7 +235,7 @@ class Solution(object):
 
         return result
 
-# effecient 2 pointer solution
+# (optimal 2 pointer solution)
 
 class Solution(object):
     def threeSum(self, nums):
@@ -292,7 +301,7 @@ class Solution(object):
         return max
 
 
-# 3. ineffecient solution 
+# 3. (suboptimal) 
 
 class Solution(object):
     def lengthOfLongestSubstring(self, s):
@@ -312,7 +321,7 @@ class Solution(object):
 
         return len(res)
 
-# effecient solution
+#3 (optimal)
 
 class Solution(object):
     def lengthOfLongestSubstring(self, s):
@@ -330,7 +339,7 @@ class Solution(object):
 
         return res
 
-# 424. ineffecient
+# 424. (inefficient)
 
 class Solution(object):
     def characterReplacement(self, s, k):
@@ -357,7 +366,7 @@ class Solution(object):
 
         return res
 
-# 424. effecient solution
+# 424. (optimal)
 
 class Solution(object):
     def characterReplacement(self, s, k):
@@ -472,7 +481,7 @@ class Solution(object):
         
         return res
 
-# 12 (my solution)
+# 12 (my solution - time efficient)
 
 class Solution(object):
     def intToRoman(self, num):
@@ -487,4 +496,17 @@ class Solution(object):
                 if num == 0:
                     return res
 
+# 12 (my solution - space efficient)
+
+class Solution(object):
+    def intToRoman(self, num):
+        convert = {1: "I", 5: "V", 10: "X", 50: "L", 100: "C", 500: "D", 1000: "M", 4: "IV", 9: "IX", 40: "XL", 90: "XC", 400: "CD", 900: "CM"}
+        res = ""
+
+        for key in sorted(convert, reverse=True):
+            while(num >= key):
+                res += convert[key]
+                num -= key
+                if num == 0:
+                    return res
 
