@@ -510,3 +510,93 @@ class Solution(object):
                 if num == 0:
                     return res
 
+# 153 (my solution - recursive)
+
+class Solution(object):
+    def findMin(self, nums):
+        n = len(nums)
+
+        if n == 1:
+            return nums[0]
+
+        mid = n//2
+
+        if nums[0] < nums[-1]:
+            if nums[0] < nums[mid]:
+                return self.findMin(nums[:mid])
+            else:
+                return self.findMin(nums[mid:])
+        elif nums[-1] < nums[mid-1]:
+            return self.findMin(nums[mid:])
+        else:
+            return self.findMin(nums[:mid])
+        
+
+# 153 (not recursive - optimal)
+
+class Solution(object):
+    def findMin(self, nums):
+        l, r = 0, len(nums) - 1
+        res = nums[0]
+
+        while l <= r:
+            if nums[l] <= nums[r]:
+                return min(res,nums[l])
+            
+            m = (l+r+1)//2
+
+            if nums[l] < nums[m]:
+                l = m+1
+            else:
+                l += 1
+                r = m
+
+# 167 (my solution)
+
+class Solution(object):
+    def twoSum(self, numbers, target):
+        l, r = 0, len(numbers) - 1
+
+        while l < r:
+            twosum = numbers[l] + numbers[r]
+            if twosum == target:
+                return [l+1, r+1]
+            elif twosum > target:
+                r -= 1
+            else:
+                l += 1
+
+# 31. (my solution)
+
+class Solution(object):
+    def search(self, nums, target):
+        l, r = 0, len(nums) - 1
+
+        while l <= r:
+            m = (l + r + 1) // 2
+            if (r - l + 1) <= 2:
+                if nums[l] == target:
+                    return l
+                elif nums[r] == target:
+                    return r
+                else:
+                    return -1
+
+            elif nums[l] < nums[m]:
+                if nums[l] <= target <= nums[m]:
+                    r = m
+                else:
+                    l = m + 1
+            elif nums[l] > nums[m]:
+                if target >= nums[l] or target <= nums[m]:
+                    r = m
+                else:
+                    l = m + 1
+            
+
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        
