@@ -719,3 +719,60 @@ class Solution(object):
         :rtype: int
         """
         
+
+# 219. (my solution - suboptimal
+
+class Solution(object):
+    def containsNearbyDuplicate(self, nums, k):
+        l = 0
+        count = Counter(nums)
+        print(count)
+
+        while l < len(nums) - 1:
+            if count[nums[l]] == 1:
+                l += 1
+                continue
+
+            r = l + 1
+
+            while r < len(nums) and r - l <= k:
+                if nums[l] == nums[r]:
+                    return True
+                else:
+                    r += 1
+            l += 1
+
+        return False
+
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: bool
+        """
+        
+# 219. optimal 
+
+class Solution(object):
+    def containsNearbyDuplicate(self, nums, k):
+        l = 0
+        window = set()
+
+        for r in range(len(nums)):
+            if r - l > k:
+                window.discard(nums[l])
+                l += 1
+            
+            if nums[r] in window:
+                return True
+                
+            else:
+                window.add(nums[r])
+
+        return False
+
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: bool
+        """
+        
