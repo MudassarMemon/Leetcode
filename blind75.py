@@ -600,3 +600,122 @@ class Solution(object):
         :rtype: int
         """
         
+
+# 20. (my solution)
+
+class Solution(object):
+    def isValid(self, s):
+        stack = []
+
+        for c in s:
+            if c == "{":
+                stack.append("}")
+            elif c == "[":
+                stack.append("]")
+            elif c == "(":
+                stack.append(")")
+            elif len(stack) == 0:
+                return False
+            elif len(stack) > 0 and c != stack.pop():
+                return False
+            
+            
+        return True if len(stack) == 0 else False
+
+        """
+        :type s: str
+        :rtype: bool
+        """
+        
+# 735 (my solution)
+class Solution(object):
+    def asteroidCollision(self, asteroids):
+
+        done = False
+
+        while not done:
+            done = True
+            for i in range(len(asteroids) - 1):
+                if asteroids[i] < 0:
+                    continue
+                else:
+                    if asteroids[i+1] > 0:
+                        continue
+                    elif asteroids[i] > asteroids[i+1] / -1:
+                        asteroids.pop(i+1)
+                    elif asteroids[i] < asteroids[i+1] / -1:
+                        asteroids.pop(i)
+                    else:
+                        asteroids.pop(i)
+                        asteroids.pop(i)
+                    done = False
+                    break
+                        
+
+        return asteroids
+
+# 56. (my solution)
+
+class Solution(object):
+    def merge(self, intervals):
+        intervals.sort()
+        res = []
+
+        for i in intervals:
+            if res:
+                if i[0] <= res[-1][1]:
+                    res[-1][1] = max(res[-1][1], i[1])
+                else:
+                    res.append(i)
+            else:
+                res.append(i)
+            
+        return res
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """
+
+# 209. (my solution)
+
+class Solution(object):
+    def minSubArrayLen(self, target, nums):
+        l,r = 0, 0 
+        res = float("infinity")
+        total = nums[l]
+        count = 1
+        
+        while l <= r and r < len(nums):
+            
+
+            while total < target and r < len(nums) - 1:
+                r += 1
+                count += 1
+                total += nums[r]
+
+                if count >= res:
+                    break
+
+            if total >= target:
+                res = min(res, count)
+                if res == 1:
+                    return res
+            elif r == len(nums) - 1:
+                break
+                
+
+            total -= nums[l]
+            count -= 1
+            l += 1        
+
+        if res != float("infinity"):
+            return res
+        else:
+            return 0
+
+        """
+        :type target: int
+        :type nums: List[int]
+        :rtype: int
+        """
+        
