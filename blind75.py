@@ -921,3 +921,113 @@ class Solution(object):
         :rtype: ListNode
         """
         
+
+# 141. (my solution)
+
+        # Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def hasCycle(self, head):
+
+        res = set()
+        i = 0
+
+        while head not in res:
+            res.add(head)
+            if not head or not head.next:
+                return False
+            head = head.next
+
+        return True
+
+
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+
+        
+# 141. Tortoise and Hare solution
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        slow, fast = head, head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if fast == slow:
+                return True
+
+        
+        return False
+
+
+# 23. (using merge sort)
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def mergeKLists(self, lists):
+
+        if not lists or len(lists) == 0:
+            return None
+
+        while len(lists) > 1:
+            merged = []
+
+            for i in range(0, len(lists), 2):
+                list1 = lists[i]
+                list2 = lists[i+1] if (i+1 < len(lists)) else None
+                merged.append(self.mergeLists(list1, list2))
+            lists = merged
+
+        return lists[0]
+
+    
+    def mergeLists(self, list1, list2):
+        mergedNodeList = ListNode()
+        tail = mergedNodeList
+
+        while list1 and list2:
+            if list1.val < list2.val:
+                tail.next = list1
+                list1 = list1.next
+            else:
+                tail.next = list2
+                list2 = list2.next
+            tail = tail.next
+        
+
+        if list1:
+            tail.next = list1
+        else:
+            tail.next = list2
+
+        return mergedNodeList.next
+
+
+
+
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        
