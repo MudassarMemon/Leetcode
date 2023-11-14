@@ -881,4 +881,43 @@ class Solution(object):
 
         
         
+# 19. (my solution)
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        
+        m = 1
+        tail = head.next
+
+        while m != n:
+            tail = tail.next
+            m += 1
+
+        curr = head
+        prev = None
+        if not tail:
+            head = curr.next
+            return head
+
+        while tail:
+            prev = curr
+            curr = curr.next
+            tail = tail.next
+
+
+        prev.next = curr.next
+
+        return head
+
+
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
         
