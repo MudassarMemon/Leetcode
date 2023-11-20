@@ -1166,4 +1166,68 @@ class Solution(object):
         :type q: TreeNode
         :rtype: bool
         """
+
+572.
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def isSubtree(self, root, subRoot):
+        if not subRoot:
+            return True
+        if not root:
+            return False
+        
+        if self.isSame(root, subRoot):
+            return True
+
+        return (self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot))
+
+        
+    def isSame(self, t, s):
+        if not t and not s:
+            return True
+        if not t or not s or s.val != t.val:
+            return False
+        
+        return (self.isSame(t.left, s.left) and self.isSame(t.right, s.right))
+
+        """
+        :type root: TreeNode
+        :type subRoot: TreeNode
+        :rtype: bool
+        """
+
+# 235. 
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def lowestCommonAncestor(self, root, p, q):
+        curr = root
+
+        while curr:
+            if p.val > curr.val and q.val > curr.val:
+                curr = curr.right
+            elif p.val < curr.val and q.val < curr.val:
+                curr = curr.left
+            else:
+                return curr
+        
+
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
         
