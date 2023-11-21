@@ -1294,4 +1294,31 @@ class Solution(object):
         :rtype: bool
         """
         
+# 230. my solution
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def kthSmallest(self, root, k):
+
+        def makeList(node):
+            if not node:
+                return []
+
+            return makeList(node.left) + [node.val] + makeList(node.right)
+
+
+        return makeList(root)[k-1]
+            
+
+
+        """
+        :type root: TreeNode
+        :type k: int
+        :rtype: int
+        """
         
